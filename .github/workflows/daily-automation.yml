@@ -38,6 +38,7 @@ jobs:
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          NVIDIA_API_KEY: ${{ secrets.NVIDIA_API_KEY }}
           CHANNEL_NAME: "The Stoic Mindset"
           NICHE: "Motivation & Stoicism"
         run: npm run pipeline:single -- --upload
