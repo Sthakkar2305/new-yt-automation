@@ -462,6 +462,11 @@ async function generateImage(prompt, negativePrompt, outputPath, sceneIndex, cat
     providerChain.push({ name: 'NVIDIA FLUX', fn: () => generateWithNvidiaFlux(prompt, outputPath, sceneIndex, category) });
   }
 
+  // ALWAYS add Pollinations as a reliable free fallback before giving up
+  if (provider !== 'pollinations') {
+    providerChain.push({ name: 'Pollinations (Free Fallback)', fn: () => generateWithPollinations(prompt, outputPath, sceneIndex, category) });
+  }
+
   // Try each provider in the chain, fall back to next on failure
   for (const { name, fn } of providerChain) {
     try {
