@@ -75,7 +75,7 @@ async function createImageClips(images, scenes, tempDir, voiceoverDuration) {
     ].join(' ');
 
     try {
-      await execAsync(cmd, { timeout: 60000 });
+      await execAsync(cmd, { timeout: 60000, maxBuffer: 1024 * 1024 * 100 });
       clipPaths.push(clipPathNormalized);
       logger.debug(`Created clip ${i + 1}: ${duration}s with ${scene.camera_direction}`);
     } catch (err) {
@@ -152,7 +152,7 @@ async function concatenateClips(clipPaths, tempDir) {
     `"${outputPathNormalized}"`,
   ].join(' ');
 
-  await execAsync(cmd, { timeout: 120000 });
+  await execAsync(cmd, { timeout: 120000, maxBuffer: 1024 * 1024 * 100 });
   logger.info('Clips concatenated into raw video');
   return outputPathNormalized;
 }
@@ -178,7 +178,7 @@ async function addVoiceover(videoPath, voiceoverPath, tempDir) {
     `"${outputPathNormalized}"`,
   ].join(' ');
 
-  await execAsync(cmd, { timeout: 60000 });
+  await execAsync(cmd, { timeout: 60000, maxBuffer: 1024 * 1024 * 100 });
   logger.info('Voiceover added to video');
   return outputPathNormalized;
 }
@@ -204,7 +204,7 @@ async function burnSubtitles(videoPath, assPath, tempDir) {
     `"${outputPathNormalized}"`,
   ].join(' ');
 
-  await execAsync(cmd, { timeout: 120000 });
+  await execAsync(cmd, { timeout: 120000, maxBuffer: 1024 * 1024 * 100 });
   logger.info('Subtitles burned into video');
   return outputPathNormalized;
 }
@@ -251,7 +251,7 @@ async function addBackgroundMusic(videoPath, tempDir, mood) {
   ].join(' ');
 
   try {
-    await execAsync(cmd, { timeout: 120000 });
+    await execAsync(cmd, { timeout: 120000, maxBuffer: 1024 * 1024 * 100 });
     logger.info('Background music added');
   } catch (err) {
     logger.warn('Music mixing failed, using video without music', { error: err.message });
