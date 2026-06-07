@@ -1,0 +1,40 @@
+name: Daily YouTube Shorts Automation
+
+on:
+  schedule:
+    # Runs at 14:00 UTC (roughly morning/afternoon depending on your timezone)
+    - cron: '0 14 * * *'
+  workflow_dispatch: # Allows you to run it manually from the GitHub UI
+
+jobs:
+  generate-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install Python & Edge-TTS
+        run: |
+          python -m pip install --upgrade pip
+          pip install edge-tts
+
+      - name: Install NPM Dependencies
+        run: npm ci
+
+      - name: Run Pipeline and Upload
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+        run: npm run pipeline:single -- --upload
