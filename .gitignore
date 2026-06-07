@@ -1,0 +1,15 @@
+node_modules/
+.env
+temp/
+output/
+logs/
+*.mp4
+*.mp3
+*.wav
+*.png
+*.jpg
+*.srt
+*.ass
+.DS_Store
+dist/
+coverage/
