@@ -166,11 +166,11 @@ export async function generateVoiceover(script, videoId, category) {
   const outputPath = path.join(outputDir, 'voiceover.mp3');
   const outputPathNormalized = outputPath.replace(/\\/g, '/');
 
-  const selectedVoice = config.voice.defaultVoice || 'en-US-SteffanNeural';
+  const selectedVoice = config.voice.defaultVoice || 'hi-IN-MadhurNeural';
   
   const isPsycho = isPsychologyCategory(category);
-  const selectedRate = isPsycho ? '-20%' : '+5%';
-  const selectedPitch = isPsycho ? '-25Hz' : '-5Hz';
+  const selectedRate = isPsycho ? '-10%' : '+0%';
+  const selectedPitch = isPsycho ? '-10Hz' : '-2Hz';
 
   // Generate with retry logic
   await pRetry(

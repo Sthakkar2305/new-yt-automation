@@ -46,9 +46,9 @@ const config = {
   // Voice - Edge TTS (100% FREE, no API key)
   voice: {
     provider: 'edge-tts',
-    defaultVoice: process.env.VOICE_NAME || 'en-US-GuyNeural', // Deep, authoritative male
-    rate: process.env.VOICE_RATE || '+2%', // Speed rate (slower/more natural than default)
-    pitch: process.env.VOICE_PITCH || '-3Hz', // Frequency pitch (deeper tone)
+    defaultVoice: process.env.VOICE_NAME || 'hi-IN-MadhurNeural', // Native Hindi male voice
+    rate: process.env.VOICE_RATE || '+0%', 
+    pitch: process.env.VOICE_PITCH || '-5Hz', 
   },
 
   // YouTube (FREE: 10,000 API units/day)
